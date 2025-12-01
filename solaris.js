@@ -1,7 +1,9 @@
 const button = document.querySelectorAll("button");
 
+// forEach loop för att hämta klick från varje klick på planet(button)
 button.forEach((button) => {
   button.addEventListener("click", (event) => {
+    // För att få fram en specifik planet när man klickar på den
     const planetName = event.currentTarget.dataset.name;
     console.log("Klickade på: " + planetName);
 
@@ -25,9 +27,11 @@ async function fetchPlanetInfo(planetName) {
     console.log("Status:", response.status);
 
     const data = await response.json();
+    // Hämtar datan (bodies) från arrayen
     const planetsArray = data.bodies;
 
     const planet = planetsArray.find((p) => p.name === planetName);
+    // Kontroll i consolen att planeten går att hämta
     console.log(data);
     console.log("Specifik planet:", planet);
 
@@ -37,6 +41,8 @@ async function fetchPlanetInfo(planetName) {
   }
 }
 
+// Function som lägger till innehåll i overlayen med info om alla planeter -
+// Kallar på functionen i fetchPlanetInfo-functionen
 function updateOverlay(planet) {
   const planetHeader = document.querySelector(".planet-header");
 
@@ -64,11 +70,6 @@ ${planet.distance}
 ${planet.temp.day}
 ${planet.temp.night}
 `;
-
-  const numberSection = document.querySelector(".planet-numbers");
-  const h3 = document.createElement("h3");
-
-  numberSection.append(h3);
 
   const planetNumbers2 = document.querySelector(".planet-numbers2");
 
